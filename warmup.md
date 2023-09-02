@@ -11,6 +11,11 @@ Click Yes at the User the User Account Control Prompt.
 Open a Kali linux command prompt: 
 ![](attachments/warmup_02.png)
 
+On the Kali console, check the IP address with:
+`ifconfig`
+
+
+
 ### step 1
 
 
