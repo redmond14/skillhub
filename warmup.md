@@ -98,18 +98,23 @@ netstat /?
 ```
 ![](attachments/warmup_08.png)
 
-List only the ESTABLISHED connections:
+TIPP3: List only the ESTABLISHED connections:
 ```cmd
 netstat -naob | findstr "ESTABLISHED"
 ```
 
-List only the LISTENING connections:
+TIPP4: List only the LISTENING connections:
 ```cmd
 netstat -naob | findstr "LISTENING"
 ```
 
 If you have RDP (or similar) access you can use TCPView application from the SysInternals package
+
 ![](attachments/warmup_20.png)
+
+If you look closer, you can find the connection (because we know what to look for) made by our supper evil beliveme.exe malware.
+
+![](attachments/warmup_09.png)
 
 
 ### step 4
