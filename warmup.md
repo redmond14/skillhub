@@ -98,12 +98,12 @@ netstat /?
 ```
 ![](attachments/warmup_08.png)
 
-==TIPP3:== List only the ESTABLISHED connections:
+**TIPP3:** List only the ESTABLISHED connections:
 ```cmd
 netstat -naob | findstr "ESTABLISHED"
 ```
 
-==TIPP4:== List only the LISTENING connections:
+**TIPP4:** List only the LISTENING connections:
 ```cmd
 netstat -naob | findstr "LISTENING"
 ```
@@ -116,11 +116,63 @@ If you look closer, you can find the connection (because we know what to look fo
 
 ![](attachments/warmup_10.png)
 
+List the network connections and look for fully qualified domains. We can get rid of them as very likely they are good ones.
+
+```cmd
+netstat -f
+```
+
+![](attachments/warmup_11.png)
+
+We can see our connection to the system on port TCP/4444. Lets find the Process ID (PID).
+The PID is 5496 (your number will be different!)
+
+```cmd
+netstat -naob
+```
+
+![](attachments/warmup_12.png)
+
+Dig deeper. Use the "tasklist" command. We can see the loaded DLL's.
+
+```cmd
+tasklist /m /fi "pid eq 5496"
+```
+
+![](attachments/warmup_13.png)
+
+
+Check "wmic" to see from where the file was launched. It was launched from the command line as there are no options.
+
+```cmd
+wmic process where processid=5496 get commandline
+```
+
+![](attachments/warmup_14.png)
+
+We can also find the parent process ID.
+
+
+```cmd
+wmic process get name,parentprocessid, processid | find "5496"
+```
+
+![](attachments/warmup_15.png)
+
+```cmd
+wmic process get name,parentprocessid, processid | find "1256"
+```
+
+![](attachments/warmup_16.png)
+
 ### step 4
 
+We can investigate the same with the opensource tools, like SecurityOnion and/or ElasticSearch
+
+
 ### step 5
-You can investigate it with a commercial tools as well (e.g. Cisco XDR)
-The XDR sees immediately the event and creates an incident
+You can investigate it with a commercial tools as well (e.g. Cisco XDR).
+The XDR sees immediately the event and creates an incident.
 
 ![](attachments/warmup_30c.png)
 
