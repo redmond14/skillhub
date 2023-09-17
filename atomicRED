@@ -13,3 +13,18 @@ IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/mas
 ```PS
 Set-ExecutionPolicy Bypass -Scope CurrentUser
 ```
+
+- add the folder to the exclusion list
+```PS
+Add-MpPreference -ExclusionPath C:\AtomicRedTeam\
+```
+
+- Import the module
+```PS
+Import-Module "C:\AtomicRedTeam\invoke-atomicredteam\Invoke-AtomicRedTeam.psd1" -Force
+```
+
+- if a test need a prerequisite, you can check it with this
+```PS
+Invoke-AtomicTest T1485 -TestNumbers 1 -CheckPrereq
+```
